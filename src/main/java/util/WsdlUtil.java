@@ -330,12 +330,14 @@ public class WsdlUtil {
                 //判断是否是Array
                 ParamInfo paramInfo = new ParamInfo();
                 String type = part.getType();
-                if (type.startsWith("ArrayOf")){
-                    paramInfo.setParamName(type.substring(7));
-                }else {
-                    paramInfo.setParamName(name);
-                }
-                paramInfo.setParamType(type);
+                if (ty != null && ty.startsWith("ArrayOf")){
+                        //没有type属性但是还是basic 则肯定是arrayofBasic
+                        paramInfo.setParamName(ty.substring(7));
+                        paramInfo.setParamType(ty);
+                    }else {
+                        paramInfo.setParamName(ele.getName());
+                        paramInfo.setParamType(ele.getType());
+                    }
                 result.add(paramInfo);
             }else {
                 String eleName = part.getElement();
