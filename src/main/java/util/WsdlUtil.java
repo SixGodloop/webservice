@@ -107,7 +107,7 @@ public class WsdlUtil {
         Element root = document.getRootElement();
         Element types = root.element("types");
         List<Element> messages =  root.elements("message");
-        List<Element> schemas =  types.elements();
+        List<Element> schemas = types == null?new ArrayList<>() : types.elements();
         Map<String,List<Element>> result = new HashMap<>();
         result.put("messages",messages);
         result.put("schemas",schemas);
